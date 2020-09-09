@@ -60,22 +60,22 @@ services:
     volumes:
       - $HOME/docker_files/influxdb:/var/lib/influxdb
 
-    home-assistant:
-      #image: homeassistant/home-assistant:0.110.4    #Specific Version
-      image: homeassistant/home-assistant:latest     #Latest Production
-      #image: homeassistant/home-assistant:rc          #Latest Beta Code
-      container_name: "homeassistant"
-      restart: always
-      depends_on:
-        influxdb:
-          condition: service_healthy
-        mqtt:
-          condition: service_started
-      network_mode: host
-      ports:
-        - 8123:8123
-        - 51827:51827
-      volumes:
-        - $HOME/docker_files/homeassistant/config:/config
-      environment:
-        - TZ=America/New_York
+  home-assistant:
+    #image: homeassistant/home-assistant:0.110.4    #Specific Version
+    image: homeassistant/home-assistant:latest     #Latest Production
+    #image: homeassistant/home-assistant:rc          #Latest Beta Code
+    container_name: "homeassistant"
+    restart: always
+    depends_on:
+      influxdb:
+        condition: service_healthy
+      mqtt:
+        condition: service_started
+    network_mode: host
+    ports:
+      - 8123:8123
+      - 51827:51827
+    volumes:
+      - $HOME/docker_files/homeassistant/config:/config
+    environment:
+      - TZ=America/New_York
